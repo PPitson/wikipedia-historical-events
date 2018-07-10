@@ -29,6 +29,12 @@ with Pool(3) as p:
     cleaned = p.map(clean_text,pages)
 documents =  list(cleaned)
 
+model50  = Doc2Vec(documents,vector_size = 50, dm_concat = 1, window = 5,min_count = 100, workers = 3, epochs = 100)
+model50.save('data/paragraphs50.data')
+model100  = Doc2Vec(documents,vector_size = 100, dm_concat = 1, window = 5,min_count = 100, workers = 3, epochs = 100)
+model100.save('data/paragraphs100.data')
 
-model  = Doc2Vec(documents,vector_size = 300, dm_concat = 1, window = 5,min_count = 100, workers = 3, iteration = 100)
-model.save('data/paragraphs.data')
+model150  = Doc2Vec(documents,vector_size = 150, dm_concat = 1, window = 5,min_count = 100, workers = 3, epochs = 100)
+model150.save('data/paragraphs150.data')
+model200  = Doc2Vec(documents,vector_size = 200, dm_concat = 1, window = 5,min_count = 100, workers = 3, epochs = 100)
+model200.save('data/paragraphs200.data')
