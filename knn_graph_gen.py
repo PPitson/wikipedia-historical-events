@@ -22,3 +22,6 @@ if __name__ == '__main__':
     else:
         result = knng(X, n_neighbors=10, n_jobs=-1, mode='distance')
         save_npz("graph_distance", result)
+
+
+from gensim.models.doc2vec import Doc2VecKeyedVectors
