@@ -29,12 +29,11 @@ with Pool(3) as p:
     cleaned = p.map(clean_text,pages)
 documents =  list(cleaned)
 
+lengths = map(lambda d: (d.tags[0], len(d.words)),documents)
+doc_id_len = list(lengths)
+
+with open('data/doc_length.data', 'wb') as f:
+    pickle.dump(doc_id_len,f, pickle.HIGHEST_PROTOCOL)
+
 model50  = Doc2Vec(documents,vector_size = 50, dm_concat = 1, window = 5,min_count = 100, workers = 3, epochs = 100)
 model50.save('data/paragraphs50.data')
-model100  = Doc2Vec(documents,vector_size = 100, dm_concat = 1, window = 5,min_count = 100, workers = 3, epochs = 100)
-model100.save('data/paragraphs100.data')
-
-model150  = Doc2Vec(documents,vector_size = 150, dm_concat = 1, window = 5,min_count = 100, workers = 3, epochs = 100)
-model150.save('data/paragraphs150.data')
-model200  = Doc2Vec(documents,vector_size = 200, dm_concat = 1, window = 5,min_count = 100, workers = 3, epochs = 100)
-model200.save('data/paragraphs200.data')
